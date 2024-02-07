@@ -1,0 +1,23 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defualtZone: http://localhost:8761/eureka
+server:
+  port: 8085
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: VACCINE-SERVICE
+        uri: lb://VACCINE-SERVICE
+        predicates: 
+          - Path=/api/center/**
+      - id: CITIZEN-SERVICE
+        uri: lb://CITIZEN-SERVICE
+        predicates: 
+          - Path=/citizen/api/**
+       
